@@ -106,8 +106,6 @@ export default function Home() {
       <section className="hero section-shell">
         <div className="hero-copy">
           <a className="eyebrow" href={links.source}>
-            <span>Distributed debugger</span>
-            <i />
             <span>Source available on GitHub</span>
             <Arrow />
           </a>
@@ -119,7 +117,7 @@ export default function Home() {
             <a className="button button-primary" href={links.quickstart}>Get started <span>→</span></a>
             <a className="button button-secondary" href={links.source}>View on GitHub <Arrow /></a>
           </div>
-          <p className="hero-note">Built at USC by Yibo Yan, Junzhou He, and Seo Jin Park · <a href={links.paper}>Read the research paper <Arrow /></a></p>
+          <p className="hero-note">USC Networked Systems Lab · <a href={links.paper}>Read the paper <Arrow /></a></p>
         </div>
         <div className="hero-demo-wrap">
           <div className="demo-tag"><i /> Live cross-RPC debugging workflow</div>
@@ -188,9 +186,7 @@ export default function Home() {
             <a className="text-link" href={links.quickstart}>Walk through the gRPC example <span>→</span></a>
           </div>
           <figure className="product-figure">
-            <div className="figure-chrome"><span><i /><i /><i /></span><em>DDB in VS Code</em><b>Raft cluster</b></div>
-            <Image unoptimized width={1800} height={832} src="/ddb-vscode-raft.png" alt="DDB VS Code frontend debugging a three-node Raft cluster, annotated with breakpoints, runtime expression evaluation, execution control, callee and caller frames, and individual process control." />
-            <figcaption>A three-node Raft cluster paused at <code>AppendEntries</code>, with caller and callee frames in one distributed call stack.</figcaption>
+            <Image unoptimized width={1800} height={955} src="/ddb-vscode-raft.png" alt="DDB in VS Code, showing breakpoints, runtime expression evaluation, execution controls, and caller and callee frames across a Raft cluster." />
           </figure>
         </div>
       </section>
