@@ -43,11 +43,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid color-mix(in srgb, va
 .section-shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .site-header { position: sticky; top: 0; z-index: 50; height: 72px; border-bottom: 1px solid color-mix(in srgb, var(--line), transparent 15%); background: var(--header-bg); backdrop-filter: blur(18px); }
 .nav-wrap { width: min(1240px, calc(100% - 40px)); height: 100%; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; }
-.wordmark { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 760; letter-spacing: -.05em; }
-.wordmark-mark { width: 28px; height: 22px; display: flex; align-items: center; gap: 3px; }
-.wordmark-mark i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 14px color-mix(in srgb, var(--blue), transparent 30%); }
-.wordmark-mark i:nth-child(2) { align-self: flex-start; background: var(--violet); }
-.wordmark-mark i:nth-child(3) { align-self: flex-end; background: var(--amber); }
+.wordmark { display: inline-flex; align-items: center; gap: 9px; font-size: 20px; font-weight: 760; letter-spacing: -.05em; }
+.wordmark-mark { width: 32px; height: 32px; overflow: hidden; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--line), transparent 20%); border-radius: 9px; background: #fff; box-shadow: 0 3px 12px rgba(24, 47, 103, .08); }
+.wordmark-mark img { display: block; width: 100%; height: 100%; object-fit: cover; }
 nav { display: flex; align-items: center; gap: 30px; font-size: 14px; color: var(--muted); }
 nav a, .github-link { transition: color .2s ease; }
 nav a:hover, .github-link:hover { color: var(--ink); }

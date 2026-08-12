@@ -14,7 +14,9 @@ const Arrow = () => <span aria-hidden="true">↗</span>;
 function Wordmark() {
   return (
     <a className="wordmark" href="#top" aria-label="DDB home">
-      <span className="wordmark-mark" aria-hidden="true"><i /><i /><i /></span>
+      <span className="wordmark-mark" aria-hidden="true">
+        <Image src="/ddb-logo.png" alt="" width={400} height={400} unoptimized />
+      </span>
       <span>DDB</span>
     </a>
   );

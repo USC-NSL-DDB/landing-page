@@ -44,6 +44,7 @@ The workflow derives the project subpath and public URL from the repository name
 - Documentation: <https://usc-nsl.gitbook.io/ddb>
 - Implementation: <https://github.com/USC-NSL-DDB/DDB>
 - Product image: Figure 3 from the authors' DDB paper, cropped for web presentation
+- Project logo: official DDB GitHub organization avatar supplied by the project author
 
 When updating a claim, include its paper section, documentation page, or implementation reference in the commit message or pull request description. Avoid presenting planned work as implemented capability.
 

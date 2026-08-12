@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "DDB — Source-Level Interactive Debugging for Distributed Applications",
   description: "DDB extends source-level interactive debugging across RPC boundaries with Distributed Backtrace, intent-preserving control, and Pause-Erased Time.",
-  icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
+  icons: { icon: "/ddb-logo.png", shortcut: "/ddb-logo.png", apple: "/ddb-logo.png" },
   openGraph: {
     title: "DDB — Debug beyond the process boundary.",
     description: "Source-level interactive debugging for distributed applications.",

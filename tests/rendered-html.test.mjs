@@ -30,6 +30,7 @@ test("renders the finished DDB research landing page", async () => {
   assert.match(html, /research prototype/i);
   assert.match(html, /development and test environments/i);
   assert.match(html, /ddb-vscode-raft\.png/);
+  assert.match(html, /ddb-logo\.png/);
   assert.match(html, /arxiv\.org\/abs\/2607\.06107/);
   assert.match(html, /usc-nsl\.gitbook\.io\/ddb/);
   assert.match(html, /github\.com\/USC-NSL-DDB\/DDB/);
@@ -39,7 +40,7 @@ test("renders the finished DDB research landing page", async () => {
 test("ships the product and social-preview image assets", async () => {
   await Promise.all([
     access(new URL("../public/ddb-vscode-raft.png", import.meta.url)),
+    access(new URL("../public/ddb-logo.png", import.meta.url)),
     access(new URL("../public/og.png", import.meta.url)),
-    access(new URL("../public/favicon.png", import.meta.url)),
   ]);
 });
