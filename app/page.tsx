@@ -1,15 +1,249 @@
-import type { Metadata } from "next";
-import { SkeletonPreview } from "./_sites-preview/SkeletonPreview";
+import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Your site is taking shape",
-  description:
-    "Your first version will appear here automatically when it’s ready.",
-  other: {
-    "codex-preview": "development",
-  },
+const links = {
+  paper: "https://arxiv.org/abs/2607.06107",
+  pdf: "https://arxiv.org/pdf/2607.06107",
+  docs: "https://usc-nsl.gitbook.io/ddb",
+  quickstart: "https://usc-nsl.gitbook.io/ddb/getting-started/quickstart",
+  source: "https://github.com/USC-NSL-DDB/DDB",
+  discord: "https://discord.gg/wN9xs7aaPy",
 };
 
+const Arrow = () => <span aria-hidden="true">↗</span>;
+
+function Wordmark() {
+  return (
+    <a className="wordmark" href="#top" aria-label="DDB home">
+      <span className="wordmark-mark" aria-hidden="true"><i /><i /><i /></span>
+      <span>DDB</span>
+    </a>
+  );
+}
+
+function ThemeToggle() {
+  return (
+    <button className="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
+      <span className="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+      <span className="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+    </button>
+  );
+}
+
+function HeroDemo() {
+  return (
+    <div className="demo-shell" aria-label="Illustrated DDB distributed backtrace">
+      <div className="demo-topbar">
+        <div className="window-dots" aria-hidden="true"><i /><i /><i /></div>
+        <span>RAFT CLUSTER</span>
+        <span className="paused-pill"><i /> PAUSED</span>
+      </div>
+      <div className="demo-grid">
+        <div className="cluster-panel">
+          <div className="panel-label">DDB SESSIONS</div>
+          <div className="service-map" aria-hidden="true">
+            <div className="rpc-line rpc-line-a"><span>AppendEntries</span></div>
+            <div className="rpc-line rpc-line-b" />
+            <div className="service-node leader">
+              <i />
+              <span>raft_node_0</span>
+              <small>LEADER</small>
+            </div>
+            <div className="service-node follower follower-one">
+              <i />
+              <span>raft_node_1</span>
+              <small>PAUSED</small>
+            </div>
+            <div className="service-node follower follower-two">
+              <i />
+              <span>raft_node_2</span>
+              <small>PAUSED</small>
+            </div>
+          </div>
+        </div>
+        <div className="stack-panel">
+          <div className="panel-heading">
+            <span className="panel-label">DISTRIBUTED CALL STACK</span>
+            <span className="live-dot">LIVE</span>
+          </div>
+          <ol className="stack-list">
+            <li className="active"><b>#0</b><span>RaftService::AppendEntries</span><em>raft_node_1</em></li>
+            <li><b>#1</b><span>RpcMethod::RunHandler</span><em>raft_node_1</em></li>
+            <li className="boundary"><span>RPC boundary</span></li>
+            <li><b>#2</b><span>Raft::send_append_entries_rpc</span><em>raft_node_0</em></li>
+            <li><b>#3</b><span>Raft::send_heartbeat</span><em>raft_node_0</em></li>
+          </ol>
+        </div>
+      </div>
+      <div className="demo-status">
+        <span><i /> Breakpoint hit in 2 replicas</span>
+        <span>Pause-erased time active</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
-  return <SkeletonPreview />;
+  return (
+    <main id="top">
+      <header className="site-header">
+        <div className="nav-wrap">
+          <Wordmark />
+          <nav aria-label="Primary navigation">
+            <a href="#approach">Approach</a>
+            <a href="#results">Results</a>
+            <a href="#frameworks">Frameworks</a>
+            <a href={links.docs}>Docs <Arrow /></a>
+          </nav>
+          <div className="nav-actions">
+            <ThemeToggle />
+            <a className="github-link" href={links.source}>GitHub <Arrow /></a>
+          </div>
+        </div>
+      </header>
+
+      <section className="hero section-shell">
+        <div className="hero-copy">
+          <a className="eyebrow" href={links.paper}>
+            <span>Research prototype</span>
+            <i />
+            <span>arXiv:2607.06107</span>
+            <Arrow />
+          </a>
+          <h1>Debug beyond the <span>process boundary.</span></h1>
+          <p className="hero-lede">
+            DDB brings source-level interactive debugging to distributed applications—so you can pause a cluster, follow a call stack across RPCs, and inspect live state in remote callers.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href={links.quickstart}>Try the quickstart <span>→</span></a>
+            <a className="button button-secondary" href={links.pdf}>Read the paper <Arrow /></a>
+          </div>
+          <p className="hero-note">Built at USC · Yibo Yan, Junzhou He, and Seo Jin Park</p>
+        </div>
+        <div className="hero-demo-wrap">
+          <div className="demo-tag"><i /> Illustrated from the paper&apos;s Raft walkthrough</div>
+          <HeroDemo />
+        </div>
+      </section>
+
+      <section className="proof-strip" id="results" aria-labelledby="results-heading">
+        <div className="section-shell">
+          <div className="proof-intro">
+            <span className="kicker">Evaluated in the paper</span>
+            <h2 id="results-heading">Interactive at distributed scale.</h2>
+          </div>
+          <div className="metrics">
+            <div><strong>30<span> ms</span></strong><p>median cross-RPC backtrace latency</p></div>
+            <div><strong>1–5<span>%</span></strong><p>throughput overhead in evaluated systems</p></div>
+            <div><strong>122</strong><p>processes in the largest evaluation</p></div>
+            <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
+          </div>
+          <p className="metric-context">Results reported by the authors in the DDB paper; workload, baseline, and study details are available in Sections 5–6.</p>
+        </div>
+      </section>
+
+      <section className="approach section-shell" id="approach">
+        <div className="section-heading split-heading">
+          <div>
+            <span className="kicker">One debugging model</span>
+            <h2>Three hard problems.<br />Three targeted mechanisms.</h2>
+          </div>
+          <p>Distributed execution breaks the single-process debugger in predictable ways. DDB addresses each one directly, while preserving a familiar source-level workflow.</p>
+        </div>
+        <div className="pillars">
+          <article className="pillar pillar-blue">
+            <div className="pillar-top"><span>01</span><div className="pillar-symbol dbt-symbol" aria-hidden="true"><i /><i /><i /></div></div>
+            <h3>Distributed Backtrace</h3>
+            <p>Compact caller-context metadata travels with each RPC. When execution pauses, DDB reconstructs one call stack across process boundaries and makes remote frames inspectable.</p>
+            <span className="pillar-detail">Cross-RPC stack reconstruction</span>
+          </article>
+          <article className="pillar pillar-violet">
+            <div className="pillar-top"><span>02</span><div className="pillar-symbol intent-symbol" aria-hidden="true"><i /><i /><i /><i /></div></div>
+            <h3>Intent-Preserving Control</h3>
+            <p>Set a breakpoint against a logical service scope. The control plane applies that intent to matching replicas—including processes that join, restart, or receive migrated computation.</p>
+            <span className="pillar-detail">Breakpoints that follow the topology</span>
+          </article>
+          <article className="pillar pillar-amber">
+            <div className="pillar-top"><span>03</span><div className="pillar-symbol pet-symbol" aria-hidden="true"><i /><b /></div></div>
+            <h3>Pause-Erased Time</h3>
+            <p>DDB virtualizes each attached process&apos;s view of time during global pauses, preventing application-level timeouts and timers inside the attached cluster from cascading.</p>
+            <span className="pillar-detail">Safe human-speed inspection</span>
+          </article>
+        </div>
+      </section>
+
+      <section className="product-showcase">
+        <div className="section-shell product-grid">
+          <div className="product-copy">
+            <span className="kicker">A familiar workflow</span>
+            <h2>Stay in the debugger.<br />See the whole request.</h2>
+            <p>DDB&apos;s VS Code frontend coordinates the cluster while keeping the interactions developers already know: breakpoints, call stacks, stepping, expression evaluation, and variable inspection.</p>
+            <ul className="feature-list">
+              <li><i /> Set one breakpoint across matching replicas</li>
+              <li><i /> Navigate from a callee to remote caller frames</li>
+              <li><i /> Inspect runtime state in the selected process</li>
+              <li><i /> Single-step one process while the cluster stays paused</li>
+            </ul>
+            <a className="text-link" href={links.quickstart}>Walk through the gRPC example <span>→</span></a>
+          </div>
+          <figure className="product-figure">
+            <div className="figure-chrome"><span><i /><i /><i /></span><em>Actual DDB VS Code frontend</em><b>Figure 3</b></div>
+            <Image unoptimized width={1800} height={832} src="/ddb-vscode-raft.png" alt="DDB VS Code frontend debugging a three-node Raft cluster, annotated with breakpoints, runtime expression evaluation, execution control, callee and caller frames, and individual process control." />
+            <figcaption>From the DDB paper: a three-node Raft cluster paused at <code>AppendEntries</code>, with caller and callee frames in one distributed call stack.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="frameworks section-shell" id="frameworks">
+        <div className="section-heading centered-heading">
+          <span className="kicker">Implemented and evaluated</span>
+          <h2>Four framework integrations.<br />Two implementation languages.</h2>
+          <p>The current research prototype has integrations for the frameworks below, as reported in the paper and reflected in the project documentation.</p>
+        </div>
+        <div className="framework-list">
+          <div><span className="framework-mark">g</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small></div>
+          <div><span className="framework-mark">S</span><strong>ServiceWeaver</strong><small>Go · ≈10 LoC integration</small></div>
+          <div><span className="framework-mark">N</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small></div>
+          <div><span className="framework-mark">Q</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small></div>
+        </div>
+      </section>
+
+      <section className="scope-section section-shell">
+        <div className="scope-card">
+          <div>
+            <span className="kicker">Prototype scope</span>
+            <h2>Designed for development and test environments.</h2>
+          </div>
+          <div className="scope-copy">
+            <p>DDB currently targets Linux on x86_64, with experimental aarch64 support, and uses GDB underneath. Pause-Erased Time covers POSIX time APIs inside the attached cluster.</p>
+            <p>Time-sensitive external services still observe real pauses, and interleaving-dependent concurrency bugs are outside the scope of pause-based debugging.</p>
+            <a className="text-link" href={`${links.pdf}#page=8`}>Read implementation limits <Arrow /></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-section section-shell">
+        <div className="cta-card">
+          <div className="cta-grid" aria-hidden="true"><i /><i /><i /></div>
+          <span className="kicker">Start with a real call chain</span>
+          <h2>From local frames to<br />distributed context.</h2>
+          <p>Install DDB, attach the VS Code extension, and follow the documented gRPC Hello World walkthrough.</p>
+          <div className="hero-actions cta-actions">
+            <a className="button button-light" href={links.quickstart}>Open the quickstart <span>→</span></a>
+            <a className="button button-dark" href={links.source}>Explore the source <Arrow /></a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div className="section-shell footer-grid">
+          <div><Wordmark /><p>Source-level interactive debugging<br />for distributed applications.</p></div>
+          <div className="footer-links"><span>Project</span><a href={links.paper}>Paper</a><a href={links.docs}>Documentation</a><a href={links.source}>Source code</a></div>
+          <div className="footer-links"><span>Community</span><a href={links.discord}>Discord</a><a href="https://nsl.usc.edu/">USC NSL</a></div>
+          <p className="footer-note">DDB is a research prototype. Evaluation claims on this page are reported in arXiv:2607.06107.</p>
+        </div>
+      </footer>
+
+      <script dangerouslySetInnerHTML={{__html: `(function(){var r=document.documentElement,b=document.querySelector('[data-theme-toggle]');function s(t){r.dataset.theme=t;localStorage.setItem('ddb-theme',t)}var saved=localStorage.getItem('ddb-theme');if(saved)s(saved);if(b)b.addEventListener('click',function(){s(r.dataset.theme==='dark'?'light':'dark')});})();`}} />
+    </main>
+  );
 }
