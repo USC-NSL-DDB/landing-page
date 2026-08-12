@@ -13,7 +13,7 @@ async function render() {
   );
 }
 
-test("renders the finished DDB research landing page", async () => {
+test("renders the finished DDB product landing page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -27,14 +27,16 @@ test("renders the finished DDB research landing page", async () => {
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);
   assert.match(html, /122/);
-  assert.match(html, /research prototype/i);
-  assert.match(html, /development and test environments/i);
+  assert.match(html, /Source available on GitHub/i);
+  assert.match(html, /Current compatibility/i);
+  assert.match(html, /Built for distributed development workflows/i);
   assert.match(html, /ddb-vscode-raft\.png/);
   assert.match(html, /ddb-logo\.png/);
   assert.match(html, /arxiv\.org\/abs\/2607\.06107/);
   assert.match(html, /usc-nsl\.gitbook\.io\/ddb/);
   assert.match(html, /github\.com\/USC-NSL-DDB\/DDB/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
+  assert.doesNotMatch(html, /research prototype/i);
 });
 
 test("ships the product and social-preview image assets", async () => {

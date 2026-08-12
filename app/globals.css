@@ -70,6 +70,8 @@ h1 span { color: var(--blue); }
 .button-primary:hover { box-shadow: 0 14px 34px color-mix(in srgb, var(--blue), transparent 52%); }
 .button-secondary { background: var(--surface); border: 1px solid var(--line); }
 .hero-note { margin-top: 26px; color: var(--muted); font-size: 12px; }
+.hero-note a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+.hero-note a:hover { color: var(--blue); }
 .hero-demo-wrap { min-width: 0; }
 .demo-tag { margin: 0 0 10px 14px; display: flex; align-items: center; gap: 7px; color: var(--muted); font: 10px/1 var(--font-geist-mono), monospace; letter-spacing: .05em; text-transform: uppercase; }
 .demo-tag i { width: 6px; height: 6px; border-radius: 50%; background: #30d08b; box-shadow: 0 0 10px #30d08b; }

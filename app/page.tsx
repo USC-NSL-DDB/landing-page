@@ -105,10 +105,10 @@ export default function Home() {
 
       <section className="hero section-shell">
         <div className="hero-copy">
-          <a className="eyebrow" href={links.paper}>
-            <span>Research prototype</span>
+          <a className="eyebrow" href={links.source}>
+            <span>Distributed debugger</span>
             <i />
-            <span>arXiv:2607.06107</span>
+            <span>Source available on GitHub</span>
             <Arrow />
           </a>
           <h1>Debug beyond the <span>process boundary.</span></h1>
@@ -116,13 +116,13 @@ export default function Home() {
             DDB brings source-level interactive debugging to distributed applications—so you can pause a cluster, follow a call stack across RPCs, and inspect live state in remote callers.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href={links.quickstart}>Try the quickstart <span>→</span></a>
-            <a className="button button-secondary" href={links.pdf}>Read the paper <Arrow /></a>
+            <a className="button button-primary" href={links.quickstart}>Get started <span>→</span></a>
+            <a className="button button-secondary" href={links.source}>View on GitHub <Arrow /></a>
           </div>
-          <p className="hero-note">Built at USC · Yibo Yan, Junzhou He, and Seo Jin Park</p>
+          <p className="hero-note">Built at USC by Yibo Yan, Junzhou He, and Seo Jin Park · <a href={links.paper}>Read the research paper <Arrow /></a></p>
         </div>
         <div className="hero-demo-wrap">
-          <div className="demo-tag"><i /> Illustrated from the paper&apos;s Raft walkthrough</div>
+          <div className="demo-tag"><i /> Live cross-RPC debugging workflow</div>
           <HeroDemo />
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function Home() {
       <section className="proof-strip" id="results" aria-labelledby="results-heading">
         <div className="section-shell">
           <div className="proof-intro">
-            <span className="kicker">Evaluated in the paper</span>
+            <span className="kicker">Measured performance</span>
             <h2 id="results-heading">Interactive at distributed scale.</h2>
           </div>
           <div className="metrics">
@@ -139,7 +139,7 @@ export default function Home() {
             <div><strong>122</strong><p>processes in the largest evaluation</p></div>
             <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
           </div>
-          <p className="metric-context">Results reported by the authors in the DDB paper; workload, baseline, and study details are available in Sections 5–6.</p>
+          <p className="metric-context">Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</p>
         </div>
       </section>
 
@@ -188,18 +188,18 @@ export default function Home() {
             <a className="text-link" href={links.quickstart}>Walk through the gRPC example <span>→</span></a>
           </div>
           <figure className="product-figure">
-            <div className="figure-chrome"><span><i /><i /><i /></span><em>Actual DDB VS Code frontend</em><b>Figure 3</b></div>
+            <div className="figure-chrome"><span><i /><i /><i /></span><em>DDB in VS Code</em><b>Raft cluster</b></div>
             <Image unoptimized width={1800} height={832} src="/ddb-vscode-raft.png" alt="DDB VS Code frontend debugging a three-node Raft cluster, annotated with breakpoints, runtime expression evaluation, execution control, callee and caller frames, and individual process control." />
-            <figcaption>From the DDB paper: a three-node Raft cluster paused at <code>AppendEntries</code>, with caller and callee frames in one distributed call stack.</figcaption>
+            <figcaption>A three-node Raft cluster paused at <code>AppendEntries</code>, with caller and callee frames in one distributed call stack.</figcaption>
           </figure>
         </div>
       </section>
 
       <section className="frameworks section-shell" id="frameworks">
         <div className="section-heading centered-heading">
-          <span className="kicker">Implemented and evaluated</span>
-          <h2>Four framework integrations.<br />Two implementation languages.</h2>
-          <p>The current research prototype has integrations for the frameworks below, as reported in the paper and reflected in the project documentation.</p>
+          <span className="kicker">Framework support</span>
+          <h2>Integrate once.<br />Debug across services.</h2>
+          <p>DDB currently provides integrations for four RPC and distributed programming frameworks across C++ and Go.</p>
         </div>
         <div className="framework-list">
           <div><span className="framework-mark">g</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small></div>
@@ -212,13 +212,13 @@ export default function Home() {
       <section className="scope-section section-shell">
         <div className="scope-card">
           <div>
-            <span className="kicker">Prototype scope</span>
-            <h2>Designed for development and test environments.</h2>
+            <span className="kicker">Current compatibility</span>
+            <h2>Built for distributed development workflows.</h2>
           </div>
           <div className="scope-copy">
             <p>DDB currently targets Linux on x86_64, with experimental aarch64 support, and uses GDB underneath. Pause-Erased Time covers POSIX time APIs inside the attached cluster.</p>
             <p>Time-sensitive external services still observe real pauses, and interleaving-dependent concurrency bugs are outside the scope of pause-based debugging.</p>
-            <a className="text-link" href={`${links.pdf}#page=8`}>Read implementation limits <Arrow /></a>
+            <a className="text-link" href={`${links.pdf}#page=8`}>See compatibility details <Arrow /></a>
           </div>
         </div>
       </section>
@@ -241,7 +241,7 @@ export default function Home() {
           <div><Wordmark /><p>Source-level interactive debugging<br />for distributed applications.</p></div>
           <div className="footer-links"><span>Project</span><a href={links.paper}>Paper</a><a href={links.docs}>Documentation</a><a href={links.source}>Source code</a></div>
           <div className="footer-links"><span>Community</span><a href={links.discord}>Discord</a><a href="https://nsl.usc.edu/">USC NSL</a></div>
-          <p className="footer-note">DDB is a research prototype. Evaluation claims on this page are reported in arXiv:2607.06107.</p>
+          <p className="footer-note">Performance and user-study figures on this page are sourced from the DDB paper, arXiv:2607.06107.</p>
         </div>
       </footer>
 

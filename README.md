@@ -1,8 +1,8 @@
-# DDB research landing page
+# DDB landing page
 
-Marketing and project landing page for [DDB: Source-Level Interactive Debugging for Distributed Applications](https://arxiv.org/abs/2607.06107).
+Product and project landing page for [DDB: Source-Level Interactive Debugging for Distributed Applications](https://arxiv.org/abs/2607.06107).
 
-The page is intentionally grounded in the paper, the [DDB implementation](https://github.com/USC-NSL-DDB/DDB), and the [project documentation](https://usc-nsl.gitbook.io/ddb). Evaluation numbers are labeled as paper results, and current prototype constraints are presented explicitly.
+The page presents DDB as a usable distributed debugging tool while grounding its capabilities in the [DDB implementation](https://github.com/USC-NSL-DDB/DDB) and [project documentation](https://usc-nsl.gitbook.io/ddb). Quantitative evaluation results are explicitly attributed to the paper, and current compatibility constraints remain visible.
 
 ## Local development
 
