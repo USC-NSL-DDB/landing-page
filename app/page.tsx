@@ -6,6 +6,9 @@ const links = {
   docs: "https://usc-nsl.gitbook.io/ddb",
   quickstart: "https://usc-nsl.gitbook.io/ddb/getting-started/quickstart",
   source: "https://github.com/USC-NSL-DDB/DDB",
+  grpc: "https://github.com/USC-NSL-DDB/grpc",
+  nu: "https://github.com/USC-NSL-DDB/Nu",
+  quicksand: "https://github.com/USC-NSL-DDB/Quicksand",
   discord: "https://discord.gg/wN9xs7aaPy",
 };
 
@@ -33,40 +36,38 @@ function ThemeToggle() {
 
 function HeroExplainer() {
   return (
-    <div className="backtrace-visual" aria-label="DDB presents one distributed call stack across an RPC boundary">
-      <div className="backtrace-head">
+    <div className="backtrace-visual" aria-label="DDB follows one request across two services and keeps both sides in one debugging session">
+      <div className="demo-heading">
         <div>
-          <span>Distributed Backtrace</span>
-          <strong>One stack. Across services.</strong>
+          <span>One request · two services</span>
+          <strong>Follow the call across the RPC.</strong>
         </div>
-        <span className="safe-pause"><i /> Paused safely</span>
+        <span className="safe-pause"><i /> Cluster paused</span>
       </div>
-      <div className="request-path" aria-label="Request path from raft node zero to raft node one">
-        <div className="process-chip">
+      <div className="service-flow" aria-label="A request travels from a caller service to a callee service">
+        <div className="service-node">
           <small>Caller</small>
-          <strong>raft_node_0</strong>
+          <strong>Service A</strong>
         </div>
-        <div className="rpc-hop" aria-hidden="true">
+        <div className="rpc-bridge" aria-hidden="true">
+          <span>RPC</span>
           <i />
-          <span>AppendEntries RPC</span>
           <b>→</b>
         </div>
-        <div className="process-chip process-chip-active">
+        <div className="service-node service-node-active">
           <small>Callee</small>
-          <strong>raft_node_1</strong>
+          <strong>Service B</strong>
         </div>
       </div>
-      <div className="stack-header"><span>Unified call stack</span><span>Process</span></div>
-      <ol className="unified-stack">
-        <li className="current"><b>00</b><code>RaftService::AppendEntries</code><em>raft_node_1</em></li>
-        <li><b>01</b><code>RpcMethod::RunHandler</code><em>raft_node_1</em></li>
-        <li className="rpc-boundary"><span>RPC boundary crossed</span><em>caller context restored</em></li>
-        <li><b>02</b><code>Raft::send_append_entries_rpc</code><em>raft_node_0</em></li>
-        <li><b>03</b><code>Raft::send_heartbeat</code><em>raft_node_0</em></li>
-      </ol>
-      <div className="backtrace-foot">
-        <span><i /> Remote caller frame</span>
-        <p>Inspect arguments and runtime state across the boundary.</p>
+      <div className="debug-result">
+        <span className="result-kicker"><i /> DDB keeps the context</span>
+        <strong>One debugging flow,<br />on both sides.</strong>
+        <div className="frame-pair" aria-label="Caller and callee frames in one debugging flow">
+          <span>Caller frame</span>
+          <b aria-hidden="true">↔</b>
+          <span>Callee frame</span>
+        </div>
+        <p>Step across the boundary and inspect live state without switching tools.</p>
       </div>
     </div>
   );
@@ -93,10 +94,6 @@ export default function Home() {
 
       <section className="hero section-shell">
         <div className="hero-copy">
-          <a className="eyebrow" href={links.source}>
-            <span>Source available on GitHub</span>
-            <Arrow />
-          </a>
           <h1>Debug beyond the <span>process boundary.</span></h1>
           <p className="hero-lede">
             DDB brings source-level interactive debugging to distributed applications—so you can pause a cluster, follow a call stack across RPCs, and inspect live state in remote callers.
@@ -115,7 +112,7 @@ export default function Home() {
       <section className="proof-strip" id="results" aria-labelledby="results-heading">
         <div className="section-shell">
           <div className="proof-intro">
-            <span className="kicker">Measured performance</span>
+            <span className="kicker">Measured performance*</span>
             <h2 id="results-heading">Interactive at distributed scale.</h2>
           </div>
           <div className="metrics">
@@ -124,36 +121,36 @@ export default function Home() {
             <div><strong>122</strong><p>processes in the largest evaluation</p></div>
             <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
           </div>
-          <p className="metric-context">Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</p>
+          <p className="metric-context">* Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</p>
         </div>
       </section>
 
       <section className="approach section-shell" id="approach">
         <div className="section-heading split-heading">
           <div>
-            <span className="kicker">One debugging model</span>
-            <h2>Three hard problems.<br />Three targeted mechanisms.</h2>
+            <span className="kicker">Why DDB</span>
+            <h2>Debug the request.<br />Not each process.</h2>
           </div>
-          <p>Distributed execution breaks the single-process debugger in predictable ways. DDB addresses each one directly, while preserving a familiar source-level workflow.</p>
+          <p>DDB turns a cluster into one source-level debugging session: follow a request across services, keep control as the topology changes, and inspect at human speed.</p>
         </div>
         <div className="pillars">
           <article className="pillar pillar-blue">
             <div className="pillar-top"><span>01</span><div className="pillar-symbol dbt-symbol" aria-hidden="true"><i /><i /><i /></div></div>
-            <h3>Distributed Backtrace</h3>
-            <p>Compact caller-context metadata travels with each RPC. When execution pauses, DDB reconstructs one call stack across process boundaries and makes remote frames inspectable.</p>
-            <span className="pillar-detail">Cross-RPC stack reconstruction</span>
+            <h3>See the whole request</h3>
+            <p>Move from the current callee back into remote caller frames as one call stack, with runtime state available in the selected process.</p>
+            <span className="pillar-detail">Distributed Backtrace</span>
           </article>
           <article className="pillar pillar-violet">
             <div className="pillar-top"><span>02</span><div className="pillar-symbol intent-symbol" aria-hidden="true"><i /><i /><i /><i /></div></div>
-            <h3>Intent-Preserving Control</h3>
-            <p>Set a breakpoint against a logical service scope. The control plane applies that intent to matching replicas—including processes that join, restart, or receive migrated computation.</p>
-            <span className="pillar-detail">Breakpoints that follow the topology</span>
+            <h3>Set breakpoints once</h3>
+            <p>Target a logical service. DDB keeps that breakpoint applied to matching replicas as processes join, restart, or receive migrated computation.</p>
+            <span className="pillar-detail">Intent-Preserving Control</span>
           </article>
           <article className="pillar pillar-amber">
             <div className="pillar-top"><span>03</span><div className="pillar-symbol pet-symbol" aria-hidden="true"><i /><b /></div></div>
-            <h3>Pause-Erased Time</h3>
-            <p>DDB virtualizes each attached process&apos;s view of time during global pauses, preventing application-level timeouts and timers inside the attached cluster from cascading.</p>
-            <span className="pillar-detail">Safe human-speed inspection</span>
+            <h3>Pause without timeout noise</h3>
+            <p>Inspect at human speed while DDB hides global debugger pauses from supported POSIX time APIs inside the attached cluster.</p>
+            <span className="pillar-detail">Pause-Erased Time</span>
           </article>
         </div>
       </section>
@@ -185,10 +182,10 @@ export default function Home() {
           <p>DDB currently provides integrations for four RPC and distributed programming frameworks across C++ and Go.</p>
         </div>
         <div className="framework-list">
-          <div><span className="framework-mark">g</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small></div>
+          <a href={links.grpc} aria-label="Open the DDB-enabled gRPC repository"><span className="framework-mark">g</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
           <div><span className="framework-mark">S</span><strong>ServiceWeaver</strong><small>Go · ≈10 LoC integration</small></div>
-          <div><span className="framework-mark">N</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small></div>
-          <div><span className="framework-mark">Q</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small></div>
+          <a href={links.nu} aria-label="Open the DDB-enabled Nu repository"><span className="framework-mark">N</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
+          <a href={links.quicksand} aria-label="Open the DDB-enabled Quicksand repository"><span className="framework-mark">Q</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
         </div>
       </section>
 
