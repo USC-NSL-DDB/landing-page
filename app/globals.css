@@ -130,12 +130,157 @@ h1 span { color: var(--blue); }
 .pillar:hover { transform: translateY(-5px); border-color: var(--line-strong); }
 .pillar-top { display: flex; align-items: flex-start; justify-content: space-between; }
 .pillar-top > span { color: var(--muted); font: 10px var(--font-geist-mono), monospace; }
-.pillar-symbol { position: relative; width: 74px; height: 74px; border-radius: 16px; background: var(--surface-2); }
+.pillar-symbol {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line-strong), transparent 22%);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--surface), transparent 10%), transparent 62%),
+    var(--surface-2);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white, transparent 80%),
+    0 10px 24px color-mix(in srgb, var(--ink), transparent 94%);
+}
 .pillar h3 { margin: 68px 0 16px; font-size: 24px; letter-spacing: -.035em; }.pillar p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .pillar-detail { margin-top: auto; padding-top: 28px; color: var(--muted); font: 10px var(--font-geist-mono), monospace; }
 .pillar-blue h3 { color: var(--blue); }.pillar-violet h3 { color: var(--violet); }.pillar-amber h3 { color: var(--amber); }
-.dbt-symbol i { position: absolute; width: 8px; height: 8px; border: 2px solid var(--blue); border-radius: 50%; }.dbt-symbol i:nth-child(1){left:15px;top:33px}.dbt-symbol i:nth-child(2){left:33px;top:18px}.dbt-symbol i:nth-child(3){right:14px;bottom:17px}.dbt-symbol::before,.dbt-symbol::after{content:"";position:absolute;height:1px;background:var(--blue);transform-origin:left}.dbt-symbol::before{width:23px;left:21px;top:36px;transform:rotate(-39deg)}.dbt-symbol::after{width:26px;left:40px;top:25px;transform:rotate(49deg)}
-.intent-symbol i { position: absolute; width: 9px; height: 9px; border: 1px solid var(--violet); border-radius: 2px; }.intent-symbol i:nth-child(1){left:32px;top:13px}.intent-symbol i:nth-child(2){left:15px;bottom:15px}.intent-symbol i:nth-child(3){right:14px;bottom:15px}.intent-symbol i:nth-child(4){left:32px;bottom:15px;background:var(--violet)}.intent-symbol::after{content:"";position:absolute;inset:24px 19px 20px;border-left:1px solid var(--violet);border-right:1px solid var(--violet);border-bottom:1px solid var(--violet)}
+.dbt-symbol {
+  background:
+    radial-gradient(circle at 54% 51%, color-mix(in srgb, var(--blue), transparent 80%) 0 2px, transparent 3px),
+    linear-gradient(145deg, color-mix(in srgb, var(--blue), var(--surface) 91%), transparent 68%),
+    var(--surface-2);
+}
+.dbt-symbol::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 28px;
+  height: 2px;
+  left: 26px;
+  top: 39px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), color-mix(in srgb, var(--blue), white 24%));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--blue), transparent 65%);
+  transform: rotate(35deg);
+}
+.dbt-symbol::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  left: 34px;
+  top: 34px;
+  border: 2px solid var(--surface-2);
+  border-radius: 2px;
+  background: var(--blue);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue), transparent 18%);
+  transform: rotate(45deg);
+}
+.dbt-symbol i {
+  position: absolute;
+  z-index: 2;
+  width: 29px;
+  height: 19px;
+  border: 1px solid color-mix(in srgb, var(--blue), white 12%);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface), var(--blue) 5%);
+  box-shadow: 0 5px 12px color-mix(in srgb, var(--blue), transparent 84%);
+}
+.dbt-symbol i::before,
+.dbt-symbol i::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--blue), transparent 12%);
+}
+.dbt-symbol i::before { width: 12px; top: 5px; }
+.dbt-symbol i::after { width: 8px; top: 10px; opacity: .52; }
+.dbt-symbol i:nth-child(1) { left: 9px; top: 13px; }
+.dbt-symbol i:nth-child(2) { right: 9px; bottom: 12px; }
+.dbt-symbol i:nth-child(3) { display: none; }
+
+.intent-symbol {
+  background:
+    radial-gradient(circle at 50% 32%, color-mix(in srgb, var(--violet), transparent 76%), transparent 26%),
+    linear-gradient(145deg, color-mix(in srgb, var(--violet), var(--surface) 92%), transparent 68%),
+    var(--surface-2);
+}
+.intent-symbol::before,
+.intent-symbol::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--violet), transparent 10%);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--violet), transparent 76%);
+}
+.intent-symbol::before { width: 40px; height: 1px; left: 17px; top: 45px; }
+.intent-symbol::after { width: 1px; height: 18px; left: 37px; top: 27px; }
+.intent-symbol i {
+  position: absolute;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border: 1px solid color-mix(in srgb, var(--violet), white 12%);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--surface), var(--violet) 6%);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--violet), transparent 84%);
+}
+.intent-symbol i::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 7px;
+  left: 6px;
+  top: -8px;
+  background: color-mix(in srgb, var(--violet), transparent 10%);
+}
+.intent-symbol i:nth-child(1) {
+  width: 18px;
+  height: 18px;
+  left: 28px;
+  top: 10px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface), var(--violet) 9%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--violet), transparent 88%);
+}
+.intent-symbol i:nth-child(1)::before {
+  width: 6px;
+  height: 6px;
+  left: 5px;
+  top: 5px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--violet), transparent 34%);
+}
+.intent-symbol i:nth-child(2) { left: 10px; bottom: 10px; }
+.intent-symbol i:nth-child(3) { right: 10px; bottom: 10px; }
+.intent-symbol i:nth-child(4) {
+  left: 30px;
+  bottom: 10px;
+  background: var(--violet);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--violet), transparent 55%);
+}
+.intent-symbol i:nth-child(4)::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, white, transparent 18%);
+}
+
+.pet-symbol {
+  background:
+    radial-gradient(circle at 72% 25%, color-mix(in srgb, var(--amber), transparent 72%), transparent 20%),
+    linear-gradient(145deg, color-mix(in srgb, var(--amber), var(--surface) 93%), transparent 68%),
+    var(--surface-2);
+}
 .pet-symbol i { position:absolute;width:36px;height:36px;left:19px;top:19px;border:2px solid var(--amber);border-radius:50%}.pet-symbol i::before,.pet-symbol i::after{content:"";position:absolute;left:16px;top:6px;width:1px;height:11px;background:var(--amber);transform-origin:bottom}.pet-symbol i::after{transform:rotate(125deg)}.pet-symbol b{position:absolute;right:12px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber)}
 
 .product-showcase { padding-block: 122px; background: var(--surface-2); border-block: 1px solid var(--line); overflow: hidden; }
