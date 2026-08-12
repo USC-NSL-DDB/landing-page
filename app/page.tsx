@@ -96,7 +96,7 @@ export default function Home() {
         <div className="hero-copy">
           <h1>Debug beyond the <span>process boundary.</span></h1>
           <p className="hero-lede">
-            DDB brings source-level interactive debugging to distributed applications—so you can pause a cluster, follow a call stack across RPCs, and inspect live state in remote callers.
+            DDB brings a single-process-like interactive debugging experience to distributed applications—one session to pause the cluster, follow a request across RPCs, and inspect live state.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href={links.quickstart}>Get started <span>→</span></a>
@@ -109,6 +109,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="value-section" aria-labelledby="value-heading">
+        <div className="section-shell value-grid">
+          <div className="value-intro">
+            <span className="kicker">DDB at a glance</span>
+            <h2 id="value-heading">One debugger.<br />A distributed application.</h2>
+            <p>DDB replaces a process-by-process workflow with one source-level debugging experience for the application as a whole.</p>
+          </div>
+          <div className="value-list">
+            <article>
+              <span>01</span>
+              <div><h3>Unified control</h3><p>Coordinate debugger commands and breakpoints across matching processes from one session.</p></div>
+            </article>
+            <article>
+              <span>02</span>
+              <div><h3>Natural reasoning</h3><p>Follow the request across services and inspect live state on either side of an RPC.</p></div>
+            </article>
+            <article>
+              <span>03</span>
+              <div><h3>Faster debugging cycles</h3><p>Pause, inspect, and continue without repeatedly adding instrumentation and redeploying to reveal more state.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="proof-strip" id="results" aria-labelledby="results-heading">
         <div className="section-shell">
           <div className="proof-intro">
@@ -117,40 +141,40 @@ export default function Home() {
           </div>
           <div className="metrics">
             <div><strong>30<span> ms</span></strong><p>median cross-RPC backtrace latency</p></div>
-            <div className="metric-with-baseline"><strong>1–5<span>%</span><sup>†</sup></strong><p>throughput overhead in evaluated systems</p><span className="metric-baseline">vs. conventional debugger</span></div>
+            <div className="metric-with-baseline"><strong>1–5<span>%</span><sup>†</sup></strong><p>throughput overhead in evaluated systems</p><span className="metric-baseline">† GDB baseline</span></div>
             <div><strong>122</strong><p>processes in the largest evaluation</p></div>
             <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
           </div>
-          <p className="metric-context"><span>* Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</span><span>† Compared with attaching a conventional single-process debugger.</span></p>
+          <p className="metric-context"><span>* Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</span><span>† Compared with attaching GDB as a conventional single-process debugger.</span></p>
         </div>
       </section>
 
       <section className="approach section-shell" id="approach">
         <div className="section-heading split-heading">
           <div>
-            <span className="kicker">Why DDB</span>
-            <h2>Debug the request.<br />Not each process.</h2>
+            <span className="kicker">How it works</span>
+            <h2>Three mechanisms.<br />One familiar workflow.</h2>
           </div>
-          <p>DDB turns a cluster into one source-level debugging session: follow a request across services, keep control as the topology changes, and inspect at human speed.</p>
+          <p>DDB extends familiar debugger behavior across RPC boundaries, changing process topologies, and debugger-induced pauses.</p>
         </div>
         <div className="pillars">
           <article className="pillar pillar-blue">
             <div className="pillar-top"><span>01</span><div className="pillar-symbol dbt-symbol" aria-hidden="true"><i /><i /><i /></div></div>
-            <h3>See the whole request</h3>
+            <h3>Distributed Backtrace</h3>
             <p>Move from the current callee back into remote caller frames as one call stack, with runtime state available in the selected process.</p>
-            <span className="pillar-detail">Distributed Backtrace</span>
+            <span className="pillar-detail">One call stack across RPCs</span>
           </article>
           <article className="pillar pillar-violet">
             <div className="pillar-top"><span>02</span><div className="pillar-symbol intent-symbol" aria-hidden="true"><i /><i /><i /><i /></div></div>
-            <h3>Set breakpoints once</h3>
+            <h3>Intent-Preserving Control</h3>
             <p>Target a logical service. DDB keeps that breakpoint applied to matching replicas as processes join, restart, or receive migrated computation.</p>
-            <span className="pillar-detail">Intent-Preserving Control</span>
+            <span className="pillar-detail">Debug intent follows the topology</span>
           </article>
           <article className="pillar pillar-amber">
             <div className="pillar-top"><span>03</span><div className="pillar-symbol pet-symbol" aria-hidden="true"><i /><b /></div></div>
-            <h3>Pause without timeout noise</h3>
+            <h3>Pause-Erased Time</h3>
             <p>Inspect at human speed while DDB hides global debugger pauses from supported POSIX time APIs inside the attached cluster.</p>
-            <span className="pillar-detail">Pause-Erased Time</span>
+            <span className="pillar-detail">Safe human-speed inspection</span>
           </article>
         </div>
       </section>
