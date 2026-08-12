@@ -117,11 +117,11 @@ export default function Home() {
           </div>
           <div className="metrics">
             <div><strong>30<span> ms</span></strong><p>median cross-RPC backtrace latency</p></div>
-            <div><strong>1–5<span>%</span></strong><p>throughput overhead in evaluated systems</p></div>
+            <div className="metric-with-baseline"><strong>1–5<span>%</span><sup>†</sup></strong><p>throughput overhead in evaluated systems</p><span className="metric-baseline">vs. conventional debugger</span></div>
             <div><strong>122</strong><p>processes in the largest evaluation</p></div>
             <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
           </div>
-          <p className="metric-context">* Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</p>
+          <p className="metric-context"><span>* Evaluation results from the DDB paper. Workloads, baselines, methodology, and study details are reported in Sections 5–6.</span><span>† Compared with attaching a conventional single-process debugger.</span></p>
         </div>
       </section>
 
