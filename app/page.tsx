@@ -31,54 +31,42 @@ function ThemeToggle() {
   );
 }
 
-function HeroDemo() {
+function HeroExplainer() {
   return (
-    <div className="demo-shell" aria-label="Illustrated DDB distributed backtrace">
-      <div className="demo-topbar">
-        <div className="window-dots" aria-hidden="true"><i /><i /><i /></div>
-        <span>RAFT CLUSTER</span>
-        <span className="paused-pill"><i /> PAUSED</span>
-      </div>
-      <div className="demo-grid">
-        <div className="cluster-panel">
-          <div className="panel-label">DDB SESSIONS</div>
-          <div className="service-map" aria-hidden="true">
-            <div className="rpc-line rpc-line-a"><span>AppendEntries</span></div>
-            <div className="rpc-line rpc-line-b" />
-            <div className="service-node leader">
-              <i />
-              <span>raft_node_0</span>
-              <small>LEADER</small>
-            </div>
-            <div className="service-node follower follower-one">
-              <i />
-              <span>raft_node_1</span>
-              <small>PAUSED</small>
-            </div>
-            <div className="service-node follower follower-two">
-              <i />
-              <span>raft_node_2</span>
-              <small>PAUSED</small>
-            </div>
-          </div>
+    <div className="backtrace-visual" aria-label="DDB presents one distributed call stack across an RPC boundary">
+      <div className="backtrace-head">
+        <div>
+          <span>Distributed Backtrace</span>
+          <strong>One stack. Across services.</strong>
         </div>
-        <div className="stack-panel">
-          <div className="panel-heading">
-            <span className="panel-label">DISTRIBUTED CALL STACK</span>
-            <span className="live-dot">LIVE</span>
-          </div>
-          <ol className="stack-list">
-            <li className="active"><b>#0</b><span>RaftService::AppendEntries</span><em>raft_node_1</em></li>
-            <li><b>#1</b><span>RpcMethod::RunHandler</span><em>raft_node_1</em></li>
-            <li className="boundary"><span>RPC boundary</span></li>
-            <li><b>#2</b><span>Raft::send_append_entries_rpc</span><em>raft_node_0</em></li>
-            <li><b>#3</b><span>Raft::send_heartbeat</span><em>raft_node_0</em></li>
-          </ol>
+        <span className="safe-pause"><i /> Paused safely</span>
+      </div>
+      <div className="request-path" aria-label="Request path from raft node zero to raft node one">
+        <div className="process-chip">
+          <small>Caller</small>
+          <strong>raft_node_0</strong>
+        </div>
+        <div className="rpc-hop" aria-hidden="true">
+          <i />
+          <span>AppendEntries RPC</span>
+          <b>→</b>
+        </div>
+        <div className="process-chip process-chip-active">
+          <small>Callee</small>
+          <strong>raft_node_1</strong>
         </div>
       </div>
-      <div className="demo-status">
-        <span><i /> Breakpoint hit in 2 replicas</span>
-        <span>Pause-erased time active</span>
+      <div className="stack-header"><span>Unified call stack</span><span>Process</span></div>
+      <ol className="unified-stack">
+        <li className="current"><b>00</b><code>RaftService::AppendEntries</code><em>raft_node_1</em></li>
+        <li><b>01</b><code>RpcMethod::RunHandler</code><em>raft_node_1</em></li>
+        <li className="rpc-boundary"><span>RPC boundary crossed</span><em>caller context restored</em></li>
+        <li><b>02</b><code>Raft::send_append_entries_rpc</code><em>raft_node_0</em></li>
+        <li><b>03</b><code>Raft::send_heartbeat</code><em>raft_node_0</em></li>
+      </ol>
+      <div className="backtrace-foot">
+        <span><i /> Remote caller frame</span>
+        <p>Inspect arguments and runtime state across the boundary.</p>
       </div>
     </div>
   );
@@ -119,9 +107,8 @@ export default function Home() {
           </div>
           <p className="hero-note">USC Networked Systems Lab · <a href={links.paper}>Read the paper <Arrow /></a></p>
         </div>
-        <div className="hero-demo-wrap">
-          <div className="demo-tag"><i /> Live cross-RPC debugging workflow</div>
-          <HeroDemo />
+        <div className="hero-visual-wrap">
+          <HeroExplainer />
         </div>
       </section>
 

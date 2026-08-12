@@ -24,6 +24,8 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /Distributed Backtrace/);
   assert.match(html, /Intent-Preserving Control/);
   assert.match(html, /Pause-Erased Time/);
+  assert.match(html, /One stack\. Across services\./);
+  assert.match(html, /RPC boundary crossed/);
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);
   assert.match(html, /122/);
