@@ -141,7 +141,7 @@ export default function Home() {
           </div>
           <div className="metrics">
             <div><strong>30<span> ms</span></strong><p>median cross-RPC backtrace latency</p></div>
-            <div className="metric-with-baseline"><strong>1–5<span>%</span><sup>†</sup></strong><p>throughput overhead in evaluated systems</p><span className="metric-baseline">† GDB baseline</span></div>
+            <div className="metric-with-baseline"><strong>1–5<span>%</span><sup>†</sup></strong><p>throughput overhead in evaluated systems</p><span className="metric-baseline">vs. GDB baseline</span></div>
             <div><strong>122</strong><p>processes in the largest evaluation</p></div>
             <div><strong>100<span>%</span></strong><p>fault localization across controlled study trials</p></div>
           </div>
