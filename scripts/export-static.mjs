@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -43,6 +43,17 @@ const [homeHtml, frameworksHtml] = await Promise.all([
 ]);
 
 await mkdir(resolve(output, "frameworks"), { recursive: true });
+
+if (basePath !== "/") {
+  const cssDirectory = resolve(output, "_next/static/css");
+  const cssFiles = (await readdir(cssDirectory)).filter((file) => file.endsWith(".css"));
+  await Promise.all(cssFiles.map(async (file) => {
+    const cssPath = resolve(cssDirectory, file);
+    const css = await readFile(cssPath, "utf8");
+    const rewrittenCss = css.replace(/url\((["']?)\/(?!\/)/g, `url($1${basePath}`);
+    await writeFile(cssPath, rewrittenCss);
+  }));
+}
 
 await Promise.all([
   writeFile(resolve(output, "index.html"), homeHtml),

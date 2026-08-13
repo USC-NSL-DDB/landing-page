@@ -28,6 +28,8 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /Why DDB/);
   assert.match(html, /How it works/);
   assert.match(html, /Integrations/);
+  assert.match(html, /class="icon-arrow"/);
+  assert.doesNotMatch(html, /↗/);
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);
   assert.match(html, /122/);
@@ -61,5 +63,7 @@ test("ships the product and social-preview image assets", async () => {
     access(new URL("../public/ddb-vscode-raft.png", import.meta.url)),
     access(new URL("../public/ddb-logo.png", import.meta.url)),
     access(new URL("../public/og.png", import.meta.url)),
+    access(new URL("../public/fonts/geist-latin.woff2", import.meta.url)),
+    access(new URL("../public/fonts/geist-mono-latin.woff2", import.meta.url)),
   ]);
 });

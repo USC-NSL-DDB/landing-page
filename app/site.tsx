@@ -16,7 +16,7 @@ const requestedBase = process.env.BASE_PATH ?? "/";
 const siteBase = requestedBase === "/" ? "" : `/${requestedBase.replace(/^\/+|\/+$/g, "")}`;
 export const localHref = (path: string) => `${siteBase}${path}`;
 
-export const Arrow = () => <span aria-hidden="true">↗</span>;
+export const Arrow = () => <span className="icon-arrow" aria-hidden="true" />;
 
 export function Wordmark({ home = false }: { home?: boolean }) {
   return (
