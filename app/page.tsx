@@ -1,38 +1,5 @@
 import Image from "next/image";
-
-const links = {
-  paper: "https://arxiv.org/abs/2607.06107",
-  pdf: "https://arxiv.org/pdf/2607.06107",
-  docs: "https://usc-nsl.gitbook.io/ddb",
-  quickstart: "https://usc-nsl.gitbook.io/ddb/getting-started/quickstart",
-  source: "https://github.com/USC-NSL-DDB/DDB",
-  grpc: "https://github.com/USC-NSL-DDB/grpc",
-  nu: "https://github.com/USC-NSL-DDB/Nu",
-  quicksand: "https://github.com/USC-NSL-DDB/Quicksand",
-  discord: "https://discord.gg/wN9xs7aaPy",
-};
-
-const Arrow = () => <span aria-hidden="true">↗</span>;
-
-function Wordmark() {
-  return (
-    <a className="wordmark" href="#top" aria-label="DDB home">
-      <span className="wordmark-mark" aria-hidden="true">
-        <Image src="/ddb-logo.png" alt="" width={400} height={400} unoptimized />
-      </span>
-      <span>DDB</span>
-    </a>
-  );
-}
-
-function ThemeToggle() {
-  return (
-    <button className="theme-toggle" type="button" aria-label="Toggle color theme" data-theme-toggle>
-      <span className="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
-      <span className="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
-    </button>
-  );
-}
+import { Arrow, links, localHref, SiteFooter, SiteHeader, ThemeScript } from "./site";
 
 function HeroExplainer() {
   return (
@@ -76,21 +43,7 @@ function HeroExplainer() {
 export default function Home() {
   return (
     <main id="top">
-      <header className="site-header">
-        <div className="nav-wrap">
-          <Wordmark />
-          <nav aria-label="Primary navigation">
-            <a href="#approach">Approach</a>
-            <a href="#results">Results</a>
-            <a href="#frameworks">Frameworks</a>
-            <a href={links.docs}>Docs <Arrow /></a>
-          </nav>
-          <div className="nav-actions">
-            <ThemeToggle />
-            <a className="github-link" href={links.source}>GitHub <Arrow /></a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader home />
 
       <section className="hero section-shell">
         <div className="hero-copy">
@@ -109,7 +62,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="value-section" aria-labelledby="value-heading">
+      <section className="value-section" id="why-ddb" aria-labelledby="value-heading">
         <div className="section-shell value-grid">
           <div className="value-intro">
             <span className="kicker">DDB at a glance</span>
@@ -201,27 +154,19 @@ export default function Home() {
 
       <section className="frameworks section-shell" id="frameworks">
         <div className="section-heading centered-heading">
-          <span className="kicker">Framework support</span>
-          <h2>Integrate once.<br />Debug across services.</h2>
-          <p>DDB currently supports four RPC and distributed programming frameworks across C++ and Go. Linked cards open the project-maintained, DDB-enabled framework forks.</p>
+          <span className="kicker">Integrations</span>
+          <h2>Built for distributed stacks.</h2>
+          <p>DDB currently supports four RPC and distributed programming frameworks across C++ and Go.</p>
         </div>
         <div className="framework-list">
-          <a href={links.grpc} aria-label="Open the project-maintained DDB-enabled gRPC fork">
-            <div className="framework-card-top"><span className="framework-mark">g</span><span className="framework-external" aria-hidden="true">↗</span></div>
-            <span className="framework-status">DDB-enabled</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small>
-          </a>
-          <div>
-            <div className="framework-card-top"><span className="framework-mark">S</span></div>
-            <span className="framework-status">DDB-enabled</span><strong>ServiceWeaver</strong><small>Go · ≈10 LoC integration</small>
-          </div>
-          <a href={links.nu} aria-label="Open the project-maintained DDB-enabled Nu fork">
-            <div className="framework-card-top"><span className="framework-mark">N</span><span className="framework-external" aria-hidden="true">↗</span></div>
-            <span className="framework-status">DDB-enabled</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small>
-          </a>
-          <a href={links.quicksand} aria-label="Open the project-maintained DDB-enabled Quicksand fork">
-            <div className="framework-card-top"><span className="framework-mark">Q</span><span className="framework-external" aria-hidden="true">↗</span></div>
-            <span className="framework-status">DDB-enabled</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small>
-          </a>
+          <div><strong>gRPC</strong><small>C++ · ≈20 LoC</small></div>
+          <div><strong>ServiceWeaver</strong><small>Go · ≈10 LoC</small></div>
+          <div><strong>Nu</strong><small>C++ · ≈30 LoC</small></div>
+          <div><strong>Quicksand</strong><small>C++ · ≈60 LoC</small></div>
+        </div>
+        <div className="framework-actions">
+          <a className="button button-secondary" href={localHref("/frameworks/")}>Explore framework support <span>→</span></a>
+          <a className="text-link" href={localHref("/frameworks/#contribute")}>Support another framework <span>→</span></a>
         </div>
       </section>
 
@@ -252,16 +197,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer>
-        <div className="section-shell footer-grid">
-          <div><Wordmark /><p>Source-level interactive debugging<br />for distributed applications.</p></div>
-          <div className="footer-links"><span>Project</span><a href={links.paper}>Paper</a><a href={links.docs}>Documentation</a><a href={links.source}>Source code</a></div>
-          <div className="footer-links"><span>Community</span><a href={links.discord}>Discord</a><a href="https://nsl.usc.edu/">USC NSL</a></div>
-          <p className="footer-note">Performance and user-study figures on this page are sourced from the DDB paper, arXiv:2607.06107.</p>
-        </div>
-      </footer>
-
-      <script dangerouslySetInnerHTML={{__html: `(function(){var r=document.documentElement,b=document.querySelector('[data-theme-toggle]');function s(t){r.dataset.theme=t;localStorage.setItem('ddb-theme',t)}var saved=localStorage.getItem('ddb-theme');if(saved)s(saved);if(b)b.addEventListener('click',function(){s(r.dataset.theme==='dark'?'light':'dark')});})();`}} />
+      <SiteFooter />
+      <ThemeScript />
     </main>
   );
 }

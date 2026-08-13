@@ -2,7 +2,7 @@
 
 Product and project landing page for [DDB: Source-Level Interactive Debugging for Distributed Applications](https://arxiv.org/abs/2607.06107).
 
-The page presents DDB as a usable distributed debugging tool while grounding its capabilities in the [DDB implementation](https://github.com/USC-NSL-DDB/DDB) and [project documentation](https://usc-nsl.gitbook.io/ddb). Quantitative evaluation results are explicitly attributed to the paper, and current compatibility constraints remain visible.
+The site presents DDB as a usable distributed debugging tool while grounding its capabilities in the [DDB implementation](https://github.com/USC-NSL-DDB/DDB) and [project documentation](https://usc-nsl.gitbook.io/ddb). The product landing page is complemented by a dedicated framework-integration page for current support and contribution paths. Quantitative evaluation results are explicitly attributed to the paper, and current compatibility constraints remain visible.
 
 ## Local development
 
@@ -30,7 +30,7 @@ NEXT_PUBLIC_SITE_URL=https://usc-nsl-ddb.github.io/ddb-landing/ \
 npm run build:pages
 ```
 
-The static output is written to `out/`.
+The static output is written to `out/`, including route directories such as `out/frameworks/` for GitHub Pages.
 
 ## GitHub Pages deployment
 

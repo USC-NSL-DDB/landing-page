@@ -11,26 +11,43 @@ await mkdir(output, { recursive: true });
 await cp(resolve(root, "dist/client"), output, { recursive: true });
 
 const { default: worker } = await import(resolve(root, "dist/server/index.js"));
-const response = await worker.fetch(
-  new Request("https://static-export.local/", { headers: { accept: "text/html" } }),
-  { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
-  { waitUntil() {}, passThroughOnException() {} },
-);
+const workerEnv = { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } };
+const workerContext = { waitUntil() {}, passThroughOnException() {} };
 
-if (!response.ok) throw new Error(`Static render failed with HTTP ${response.status}`);
+async function renderRoute(pathname) {
+  const response = await worker.fetch(
+    new Request(`https://static-export.local${pathname}`, { headers: { accept: "text/html" } }),
+    workerEnv,
+    workerContext,
+  );
 
-let html = await response.text();
-if (basePath !== "/") {
-  html = html
-    .replace(/(href|src|data-rsc-css-href)="\/(?!\/)/g, `$1="${basePath}`)
-    .replace(/\\"\/_next\//g, `\\"${basePath}_next/`)
-    .replace(/\\"\/ddb-vscode-raft\.png/g, `\\"${basePath}ddb-vscode-raft.png`)
-    .replace(/\\"\/favicon\.png/g, `\\"${basePath}favicon.png`);
+  if (!response.ok) throw new Error(`Static render for ${pathname} failed with HTTP ${response.status}`);
+
+  let html = await response.text();
+  if (basePath !== "/") {
+    const escapedBaseSegment = basePath.slice(1).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const unprefixedHtmlPath = new RegExp(`(href|src|data-rsc-css-href)="/(?!/|${escapedBaseSegment})`, "g");
+    html = html
+      .replace(unprefixedHtmlPath, `$1="${basePath}`)
+      .replace(/\\"\/_next\//g, `\\"${basePath}_next/`)
+      .replace(/\\"\/ddb-vscode-raft\.png/g, `\\"${basePath}ddb-vscode-raft.png`)
+      .replace(/\\"\/ddb-logo\.png/g, `\\"${basePath}ddb-logo.png`)
+      .replace(/\\"\/favicon\.png/g, `\\"${basePath}favicon.png`);
+  }
+  return html;
 }
 
+const [homeHtml, frameworksHtml] = await Promise.all([
+  renderRoute("/"),
+  renderRoute("/frameworks"),
+]);
+
+await mkdir(resolve(output, "frameworks"), { recursive: true });
+
 await Promise.all([
-  writeFile(resolve(output, "index.html"), html),
-  writeFile(resolve(output, "404.html"), html),
+  writeFile(resolve(output, "index.html"), homeHtml),
+  writeFile(resolve(output, "404.html"), homeHtml),
+  writeFile(resolve(output, "frameworks/index.html"), frameworksHtml),
   writeFile(resolve(output, ".nojekyll"), ""),
 ]);
 

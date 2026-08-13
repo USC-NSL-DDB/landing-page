@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { access } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
   return worker.fetch(
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request(`http://localhost${pathname}`, { headers: { accept: "text/html" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
@@ -24,12 +24,13 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /Distributed Backtrace/);
   assert.match(html, /Intent-Preserving Control/);
   assert.match(html, /Pause-Erased Time/);
-  assert.match(html, /One stack\. Across services\./);
-  assert.match(html, /RPC boundary crossed/);
+  assert.match(html, /One debugging flow/);
+  assert.match(html, /Why DDB/);
+  assert.match(html, /How it works/);
+  assert.match(html, /Integrations/);
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);
   assert.match(html, /122/);
-  assert.match(html, /Source available on GitHub/i);
   assert.match(html, /Current compatibility/i);
   assert.match(html, /Built for distributed development workflows/i);
   assert.match(html, /ddb-vscode-raft\.png/);
@@ -39,6 +40,20 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /github\.com\/USC-NSL-DDB\/DDB/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
   assert.doesNotMatch(html, /research prototype/i);
+});
+
+test("renders the framework support and contribution page", async () => {
+  const response = await render("/frameworks");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Framework Integrations — DDB/);
+  assert.match(html, /Bring DDB to your distributed stack/);
+  assert.match(html, /Four working integrations/);
+  assert.match(html, /Support another framework/);
+  assert.match(html, /github\.com\/USC-NSL-DDB\/grpc/);
+  assert.match(html, /github\.com\/USC-NSL-DDB\/Nu/);
+  assert.match(html, /github\.com\/USC-NSL-DDB\/Quicksand/);
 });
 
 test("ships the product and social-preview image assets", async () => {
