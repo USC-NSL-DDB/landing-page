@@ -297,9 +297,12 @@ h1 span { color: var(--blue); }
 .framework-list > * { min-height: 230px; padding: 26px; display: flex; flex-direction: column; justify-content: flex-end; border-right: 1px solid var(--line); }.framework-list > *:last-child { border: 0; }
 .framework-list > a { transition: background .2s ease, box-shadow .2s ease; }
 .framework-list > a:hover { background: color-mix(in srgb, var(--blue-soft), transparent 35%); box-shadow: inset 0 -3px 0 var(--blue); }
-.framework-mark { margin-bottom: auto; width: 45px; height: 45px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 11px; color: var(--blue); background: var(--surface-2); font: 20px var(--font-geist-mono), monospace; }
+.framework-card-top { width: 100%; margin-bottom: auto; display: flex; align-items: flex-start; justify-content: space-between; }
+.framework-mark { width: 45px; height: 45px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 11px; color: var(--blue); background: var(--surface-2); font: 20px var(--font-geist-mono), monospace; }
+.framework-external { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); font-size: 13px; transition: color .2s ease, border-color .2s ease, transform .2s ease; }
+.framework-list > a:hover .framework-external { color: var(--blue); border-color: color-mix(in srgb, var(--blue), var(--line) 45%); transform: translate(2px, -2px); }
+.framework-status { width: fit-content; margin-bottom: 12px; padding: 5px 8px; border-radius: 999px; color: var(--blue); background: color-mix(in srgb, var(--blue-soft), transparent 20%); font: 7px/1 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
 .framework-list strong { font-size: 19px; letter-spacing: -.03em; }.framework-list small { margin-top: 7px; color: var(--muted); font: 9px var(--font-geist-mono), monospace; }
-.framework-repo { margin-top: 15px; color: var(--blue); font: 8px var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .07em; }
 
 .scope-section { padding-bottom: 126px; }
 .scope-card { padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }

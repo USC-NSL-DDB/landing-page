@@ -203,13 +203,25 @@ export default function Home() {
         <div className="section-heading centered-heading">
           <span className="kicker">Framework support</span>
           <h2>Integrate once.<br />Debug across services.</h2>
-          <p>DDB currently provides integrations for four RPC and distributed programming frameworks across C++ and Go.</p>
+          <p>DDB currently supports four RPC and distributed programming frameworks across C++ and Go. Linked cards open the project-maintained, DDB-enabled framework forks.</p>
         </div>
         <div className="framework-list">
-          <a href={links.grpc} aria-label="Open the DDB-enabled gRPC repository"><span className="framework-mark">g</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
-          <div><span className="framework-mark">S</span><strong>ServiceWeaver</strong><small>Go · ≈10 LoC integration</small></div>
-          <a href={links.nu} aria-label="Open the DDB-enabled Nu repository"><span className="framework-mark">N</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
-          <a href={links.quicksand} aria-label="Open the DDB-enabled Quicksand repository"><span className="framework-mark">Q</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small><span className="framework-repo">DDB repository <Arrow /></span></a>
+          <a href={links.grpc} aria-label="Open the project-maintained DDB-enabled gRPC fork">
+            <div className="framework-card-top"><span className="framework-mark">g</span><span className="framework-external" aria-hidden="true">↗</span></div>
+            <span className="framework-status">DDB-enabled</span><strong>gRPC</strong><small>C++ · ≈20 LoC integration</small>
+          </a>
+          <div>
+            <div className="framework-card-top"><span className="framework-mark">S</span></div>
+            <span className="framework-status">DDB-enabled</span><strong>ServiceWeaver</strong><small>Go · ≈10 LoC integration</small>
+          </div>
+          <a href={links.nu} aria-label="Open the project-maintained DDB-enabled Nu fork">
+            <div className="framework-card-top"><span className="framework-mark">N</span><span className="framework-external" aria-hidden="true">↗</span></div>
+            <span className="framework-status">DDB-enabled</span><strong>Nu</strong><small>C++ · ≈30 LoC integration</small>
+          </a>
+          <a href={links.quicksand} aria-label="Open the project-maintained DDB-enabled Quicksand fork">
+            <div className="framework-card-top"><span className="framework-mark">Q</span><span className="framework-external" aria-hidden="true">↗</span></div>
+            <span className="framework-status">DDB-enabled</span><strong>Quicksand</strong><small>C++ · ≈60 LoC integration</small>
+          </a>
         </div>
       </section>
 
