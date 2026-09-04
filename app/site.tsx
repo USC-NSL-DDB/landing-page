@@ -39,19 +39,26 @@ export function ThemeToggle() {
 }
 
 export function SiteHeader({ home = false }: { home?: boolean }) {
+  const navigation = (
+    <>
+      <a href={home ? "#why-ddb" : localHref("/#why-ddb")}>Why DDB</a>
+      <a href={home ? "#approach" : localHref("/#approach")}>How it works</a>
+      <a href={localHref("/frameworks/")}>Integrations</a>
+      <a href={links.quickstart}>Get started <Arrow /></a>
+    </>
+  );
   return (
     <header className="site-header">
       <div className="nav-wrap">
         <Wordmark home={home} />
-        <nav aria-label="Primary navigation">
-          <a href={home ? "#why-ddb" : localHref("/#why-ddb")}>Why DDB</a>
-          <a href={home ? "#approach" : localHref("/#approach")}>How it works</a>
-          <a href={localHref("/frameworks/")}>Integrations</a>
-          <a href={links.quickstart}>Get started <Arrow /></a>
-        </nav>
+        <nav className="desktop-nav" aria-label="Primary navigation">{navigation}</nav>
         <div className="nav-actions">
           <ThemeToggle />
           <a className="github-link" href={links.source}>GitHub <Arrow /></a>
+          <details className="mobile-menu">
+            <summary>Menu <span aria-hidden="true">+</span></summary>
+            <nav aria-label="Mobile navigation">{navigation}<a href={links.source}>GitHub <Arrow /></a></nav>
+          </details>
         </div>
       </div>
     </header>
@@ -72,5 +79,15 @@ export function SiteFooter() {
 }
 
 export function ThemeScript() {
-  return <script dangerouslySetInnerHTML={{__html: `(function(){var r=document.documentElement,b=document.querySelector('[data-theme-toggle]');function s(t){r.dataset.theme=t;localStorage.setItem('ddb-theme',t)}var saved=localStorage.getItem('ddb-theme');if(saved)s(saved);if(b)b.addEventListener('click',function(){s(r.dataset.theme==='dark'?'light':'dark')});})();`}} />;
+  return <script dangerouslySetInnerHTML={{__html: `(function(){
+    var r=document.documentElement,b=document.querySelector('[data-theme-toggle]'),menu=document.querySelector('.mobile-menu');
+    function s(t){r.dataset.theme=t;try{localStorage.setItem('ddb-theme',t)}catch(e){}}
+    try{var saved=localStorage.getItem('ddb-theme');if(saved==='dark'||saved==='light')s(saved)}catch(e){}
+    if(b)b.addEventListener('click',function(){s(r.dataset.theme==='dark'?'light':'dark')});
+    if(menu){
+      menu.addEventListener('click',function(e){if(e.target.closest('a'))menu.open=false});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus()}});
+      document.addEventListener('click',function(e){if(!menu.contains(e.target))menu.open=false});
+    }
+  })();`}} />;
 }
