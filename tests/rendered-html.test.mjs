@@ -24,17 +24,23 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /Distributed Backtrace/);
   assert.match(html, /Intent-Preserving Control/);
   assert.match(html, /Pause-Erased Time/);
-  assert.match(html, /One debugging flow/);
+  assert.match(html, /Inspect both sides of a request in one call stack/);
   assert.match(html, /Why DDB/);
   assert.match(html, /How it works/);
   assert.match(html, /Integrations/);
   assert.match(html, /class="icon-arrow"/);
+  assert.match(html, /<svg class="icon-arrow"[^>]*viewBox="0 0 24 24"/);
+  assert.match(html, /<svg class="theme-icon theme-icon-sun"/);
+  assert.match(html, /<svg class="theme-icon theme-icon-moon"/);
+  assert.doesNotMatch(html, /☼|◐/);
   assert.doesNotMatch(html, /↗/);
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);
   assert.match(html, /122/);
   assert.match(html, /Current compatibility/i);
-  assert.match(html, /Built for distributed development workflows/i);
+  assert.match(html, /Linux · GDB/i);
+  assert.match(html, /aria-label="Mobile navigation"/);
+  assert.match(html, /<summary>Menu/);
   assert.match(html, /ddb-vscode-raft\.png/);
   assert.match(html, /ddb-logo\.png/);
   assert.match(html, /arxiv\.org\/abs\/2607\.06107/);
@@ -50,8 +56,8 @@ test("renders the framework support and contribution page", async () => {
 
   const html = await response.text();
   assert.match(html, /Framework Integrations — DDB/);
-  assert.match(html, /Bring DDB to your distributed stack/);
-  assert.match(html, /Four working integrations/);
+  assert.match(html, /Find your DDB integration/);
+  assert.match(html, /Supported frameworks/);
   assert.match(html, /Support another framework/);
   assert.match(html, /github\.com\/USC-NSL-DDB\/grpc/);
   assert.match(html, /github\.com\/USC-NSL-DDB\/Nu/);

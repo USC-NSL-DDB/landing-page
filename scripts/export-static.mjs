@@ -50,7 +50,9 @@ if (basePath !== "/") {
   await Promise.all(cssFiles.map(async (file) => {
     const cssPath = resolve(cssDirectory, file);
     const css = await readFile(cssPath, "utf8");
-    const rewrittenCss = css.replace(/url\((["']?)\/(?!\/)/g, `url($1${basePath}`);
+    const rewrittenCss = css.replace(/url\((["']?)(\/(?!\/)[^"')\s]*)/g, (match, quote, path) =>
+      path.startsWith(basePath) ? match : `url(${quote}${basePath}${path.slice(1)}`,
+    );
     await writeFile(cssPath, rewrittenCss);
   }));
 }
