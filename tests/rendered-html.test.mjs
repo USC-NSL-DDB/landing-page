@@ -29,6 +29,10 @@ test("renders the finished DDB product landing page", async () => {
   assert.match(html, /How it works/);
   assert.match(html, /Integrations/);
   assert.match(html, /class="icon-arrow"/);
+  assert.match(html, /<svg class="icon-arrow"[^>]*viewBox="0 0 24 24"/);
+  assert.match(html, /<svg class="theme-icon theme-icon-sun"/);
+  assert.match(html, /<svg class="theme-icon theme-icon-moon"/);
+  assert.doesNotMatch(html, /☼|◐/);
   assert.doesNotMatch(html, /↗/);
   assert.match(html, /30<[^>]*> ms/);
   assert.match(html, /1–5<[^>]*>%/);

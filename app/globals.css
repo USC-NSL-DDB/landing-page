@@ -70,9 +70,7 @@ h2 { font-size: clamp(32px, 3.5vw, 44px); line-height: 1.12; letter-spacing: -.0
 h3 { font-size: 21px; line-height: 1.25; letter-spacing: -.025em; font-weight: 630; }
 .section-shell { width: min(1180px, calc(100% - 64px)); margin-inline: auto; }
 .kicker { display: block; margin-bottom: 14px; color: var(--blue); font-size: var(--text-caption); font-weight: 600; letter-spacing: .065em; line-height: 1.4; text-transform: uppercase; }
-.icon-arrow { position: relative; width: .82em; height: .82em; display: inline-block; flex: 0 0 auto; vertical-align: -.04em; }
-.icon-arrow::before { content: ""; position: absolute; left: 2%; bottom: 7%; width: 120%; height: 1.5px; border-radius: 1px; background: currentColor; transform: rotate(-45deg); transform-origin: left center; }
-.icon-arrow::after { content: ""; position: absolute; top: 0; right: 0; width: 48%; height: 48%; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; }
+.icon-arrow { width: 1em; height: 1em; display: inline-block; flex: 0 0 auto; vertical-align: -.14em; }
 .site-header { position: sticky; top: 0; z-index: 50; height: 72px; border-bottom: 1px solid var(--line); background: var(--header-bg); backdrop-filter: blur(18px); }
 .nav-wrap { position: relative; width: min(1240px, calc(100% - 48px)); height: 100%; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .wordmark { display: inline-flex; align-items: center; gap: 9px; font-size: 20px; font-weight: 760; letter-spacing: -.05em; }
@@ -80,13 +78,16 @@ h3 { font-size: 21px; line-height: 1.25; letter-spacing: -.025em; font-weight: 6
 .wordmark-mark img { display: block; width: 100%; height: 100%; object-fit: cover; }
 nav { display: flex; align-items: center; gap: 26px; font-size: var(--text-small); color: var(--muted); }
 nav a:hover, .github-link:hover { color: var(--blue); }
+.desktop-nav a, .github-link, .mobile-menu nav a { display: inline-flex; align-items: center; gap: 5px; }
 .nav-actions { display: flex; align-items: center; gap: 18px; }
 .github-link { font-size: var(--text-small); font-weight: 620; }
-.theme-toggle { position: relative; width: 44px; height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 50%; cursor: pointer; }
-.theme-icon { position: absolute; inset: 0; display: grid; place-items: center; font-size: 23px; }
-.theme-icon-moon { opacity: 0; }
-[data-theme="dark"] .theme-icon-sun { opacity: 0; }
-[data-theme="dark"] .theme-icon-moon { opacity: 1; }
+.theme-toggle { position: relative; flex: 0 0 auto; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 12px; cursor: pointer; transition: color .15s, background .15s, border-color .15s; }
+.theme-toggle:hover { color: var(--ink); background: var(--surface); border-color: var(--line-strong); }
+.theme-toggle:active { background: var(--surface-2); }
+.theme-icon { position: absolute; inset: 0; margin: auto; width: 20px; height: 20px; pointer-events: none; }
+.theme-icon-sun { visibility: hidden; }
+[data-theme="dark"] .theme-icon-sun { visibility: visible; }
+[data-theme="dark"] .theme-icon-moon { visibility: hidden; }
 .mobile-menu { display: none; }
 .mobile-menu summary { display: flex; align-items: center; gap: 12px; padding: 9px 14px; min-height: 44px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); cursor: pointer; font-size: 15px; list-style: none; }
 .mobile-menu summary::-webkit-details-marker { display: none; }
