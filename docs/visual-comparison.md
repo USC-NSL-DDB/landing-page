@@ -25,6 +25,11 @@ Capability claims remain grounded in the baseline page's implementation and pape
 references. The metrics are unchanged. The product image remains the authors'
 Figure 3. This revision adds no new supported platforms or frameworks.
 
+A separate deployment fix aligns Vite's runtime preload URLs with the Pages
+base path and prevents double-prefixing font URLs during export. It does not
+change the visual treatment. The exported home and integrations routes were
+checked under `/landing-page/` with fonts loaded and no browser errors.
+
 ## Observed proportions
 
 Measurements use the same in-app browser, loaded fonts, and light theme.
