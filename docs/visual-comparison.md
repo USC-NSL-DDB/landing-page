@@ -1,7 +1,9 @@
 # Visual balance comparison
 
 Baseline A is commit `5fb4d2c`, the version on `main` when this comparison began.
-Variant B is branch `codex/visual-balance`. Production remains on `main`.
+Variant B was developed on `codex/visual-balance` and approved on 2026-09-04
+as the canonical design for `main`. The approved visual implementation is
+commit `1666c9b`; the baseline remains available at `5fb4d2c` for comparison.
 
 This compares the full set of visual changes together. It does not isolate the
 effect of any individual change.
@@ -62,6 +64,6 @@ the same theme. Theme preferences are stored separately for each origin.
 The current review session serves a frozen static baseline on port 3002.
 
 Check the complete page at desktop and mobile widths, then try the menu,
-integration navigation, full-size screenshot, and theme toggle. Keep `main`
-unchanged until choosing a version. The Pages workflow deploys pushes to `main`
-only, so publishing this comparison branch does not replace the production site.
+integration navigation, full-size screenshot, and theme toggle. The Pages
+workflow deploys pushes to `main` only. The comparison branch is retained as
+a record of the review; future development starts from `main`.
